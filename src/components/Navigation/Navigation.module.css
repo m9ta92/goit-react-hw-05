@@ -1,0 +1,17 @@
+.active {
+    color: red;
+}
+
+.home {
+    display: flex;
+    flex-direction: column;
+    padding: 0px 20px;
+}
+
+.nav {
+    display: flex;
+    gap: 20px;
+    padding: 10px 0px;
+    font-size: xx-large;
+    font-weight: 500;
+}

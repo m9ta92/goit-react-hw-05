@@ -1,0 +1,10 @@
+.list {
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+    gap: 3px;
+    padding: 10px;
+    color: rgba(0, 0, 255, 0.75);
+    border: 1px solid black;
+    border-radius: 5px;
+}
