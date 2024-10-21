@@ -1,5 +1,4 @@
 // Відтворення списку фільмів
-
 import { Link } from 'react-router-dom';
 import css from './MovieList.module.css';
 

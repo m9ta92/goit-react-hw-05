@@ -1,9 +1,9 @@
-// Сторінка пошуку фільмів ...
-import css from './MoviesPage.module.css';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
-import MovieList from '../../components/MovieList/MovieList';
+import { useSearchParams } from 'react-router-dom';
 import toast, { Toaster } from 'react-hot-toast';
+import MovieList from '../../components/MovieList/MovieList';
+import css from './MoviesPage.module.css';
 
 const MoviesPage = () => {
   const [options] = useState({
@@ -14,14 +14,15 @@ const MoviesPage = () => {
         'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJmNTI0NTRmNGZmZjk0ZTVjOTE4NjhhNDZjOGQxMDQ1NyIsIm5iZiI6MTcyOTE5MzUzMi45NTU0NzYsInN1YiI6IjY3MTE1YTA0MjlkOGE1OWUwNDVlYzk4NCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.Kdlbow49ibH1cGXKkloUBH6jAQ7gEpEKwfBkL_zotvg',
     },
   });
-  const [searchValue, setSearchValue] = useState(null);
   const [searchMovies, setSearchMovies] = useState(null);
+  // const [searchValue, setSearchValue] = useState(null);
+  const [searchParams, setSearchParams] = useSearchParams();
   const [term, setTerm] = useState('');
 
+  const searchValue = searchParams.get('q');
+
   useEffect(() => {
-    if (searchValue === null) {
-      return;
-    }
+    if (searchValue === null) return;
 
     const fetchSearchMovies = async () => {
       const { data } = await axios
@@ -33,7 +34,7 @@ const MoviesPage = () => {
       if (data.total_results) {
         setSearchMovies(data.results);
       } else {
-        toast.error('Opps, no any movie for your question 🙋 ', {
+        toast.error('Opps, any movie for your question 🙋 ', {
           position: 'top-center',
         });
         setSearchMovies(null);
@@ -52,12 +53,11 @@ const MoviesPage = () => {
       setTerm('');
       return;
     } else {
-      setSearchValue(term.trim());
+      // setSearchValue(term.trim());
+      setSearchParams({ q: term.trim() });
       setTerm('');
     }
   };
-
-  console.log(searchMovies);
 
   return (
     <>
