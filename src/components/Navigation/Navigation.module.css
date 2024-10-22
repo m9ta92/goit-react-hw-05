@@ -1,17 +1,23 @@
-.active {
-    color: red;
+.header {
+    margin-bottom: 20px;
 }
 
-.home {
-    display: flex;
-    flex-direction: column;
-    padding: 0px 20px;
-}
-
-.nav {
+.list {
     display: flex;
     gap: 20px;
-    padding: 10px 0px;
     font-size: xx-large;
-    font-weight: 500;
+}
+
+.item {
+    border: 1px solid black;
+    border-radius: 3px;
+    padding: 5px;
+}
+
+.active {
+    color: red;
+    border: 1px solid red;
+    border-radius: 3px;
+    padding: 5px;
+    background-color: rgb(141, 204, 141);
 }

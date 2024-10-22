@@ -2,6 +2,8 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
+import css from './MovieReviews.module.css';
+
 const MovieReviews = () => {
   const [options] = useState({
     method: 'GET',
@@ -31,9 +33,9 @@ const MovieReviews = () => {
   if (movieReviews)
     return (
       <>
-        <ul>
+        <ul className={css.list}>
           {movieReviews.map(movieReview => (
-            <li key={movieReview.id}>
+            <li className={css.item} key={movieReview.id}>
               <h4>{movieReview.author}</h4>
               <p>{movieReview.content}</p>
             </li>

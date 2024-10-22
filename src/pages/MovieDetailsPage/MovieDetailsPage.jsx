@@ -1,9 +1,17 @@
-// Сторінка з інформацією про конкретний фільм ...
-import css from './MovieDetailsPage.module.css';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { Link, Outlet, useParams } from 'react-router-dom';
-import MovieCast from '../../components/MovieCast/MovieCast';
+import {
+  Link,
+  NavLink,
+  Outlet,
+  useLocation,
+  useNavigate,
+  useParams,
+} from 'react-router-dom';
+
+import css from './MovieDetailsPage.module.css';
+import clsx from 'clsx';
+const cssClasses = ({ isActive }) => clsx(isActive && css.active);
 
 const MovieDetailsPage = () => {
   const [options] = useState({
@@ -14,6 +22,7 @@ const MovieDetailsPage = () => {
         'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJmNTI0NTRmNGZmZjk0ZTVjOTE4NjhhNDZjOGQxMDQ1NyIsIm5iZiI6MTcyOTE5MjI2OC4xODczODksInN1YiI6IjY3MTE1YTA0MjlkOGE1OWUwNDVlYzk4NCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.uJg6F-xqM6MpIr-XliFyApDdMMv8qzYHU51A2hdklME',
     },
   });
+
   const [movieDetails, setMovieDetails] = useState(null);
   const { movieId } = useParams();
 
@@ -30,10 +39,17 @@ const MovieDetailsPage = () => {
     fetchTrendingMovies();
   }, [options, movieId]);
 
-  if (movieDetails != null) {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const backUrl = location.state?.from;
+  const goBack = () => navigate(backUrl);
+
+  if (movieDetails != null)
     return (
       <>
-        <button className={css.Btn}>Go back</button>
+        <button className={css.Btn} onClick={goBack}>
+          Go back
+        </button>
         <div className={css.movie_container}>
           <img
             className={css.picture}
@@ -55,14 +71,25 @@ const MovieDetailsPage = () => {
             <p>{movieDetails.genres.map(genre => genre.name)}</p>
           </div>
         </div>
-        <div>
-          <Link to={`/movies/${movieId}/cast`}>Cast</Link>
-          <Link to={`/movies/${movieId}/reviews`}>Reviews</Link>
+        <div className={css.list}>
+          <NavLink
+            className={cssClasses}
+            state={{ from: backUrl }}
+            to={`/movies/${movieId}/cast`}
+          >
+            Cast
+          </NavLink>
+          <NavLink
+            className={cssClasses}
+            state={{ from: backUrl }}
+            to={`/movies/${movieId}/reviews`}
+          >
+            Reviews
+          </NavLink>
         </div>
         <Outlet />
       </>
     );
-  }
 };
 
 export default MovieDetailsPage;

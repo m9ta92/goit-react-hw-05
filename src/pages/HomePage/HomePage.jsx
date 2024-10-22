@@ -27,8 +27,10 @@ const HomePage = () => {
 
   return (
     <>
-      <h3 className={css.title}>Trending today :</h3>
-      <MovieList movies={trendingMovies} />
+      <div className={css.container}>
+        <h3 className={css.title}>Trending today :</h3>
+        <MovieList movies={trendingMovies} />
+      </div>
     </>
   );
 };

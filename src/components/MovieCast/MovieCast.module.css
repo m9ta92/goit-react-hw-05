@@ -1,0 +1,26 @@
+.list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: end;
+    border: 1px solid black;
+    border-radius: 5px;
+    width: fit-content;
+    padding: 20px;
+}
+
+.item {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.photo {
+    width: 200px;
+    height: 300px;
+    object-fit: cover;
+    margin-bottom: 10px;
+}
