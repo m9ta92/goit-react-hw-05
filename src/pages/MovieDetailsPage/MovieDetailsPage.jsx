@@ -11,7 +11,7 @@ import {
 import css from './MovieDetailsPage.module.css';
 import clsx from 'clsx';
 
-const cssClasses = ({ isActive }) => clsx(isActive && css.active);
+const cssClasses = ({ isActive }) => clsx(isActive && css.active) || css.link;
 
 const MovieDetailsPage = () => {
   const [options] = useState({
@@ -52,11 +52,13 @@ const MovieDetailsPage = () => {
         </button>
         <div className={css.container}>
           {movieDetails.backdrop_path ? (
-            <img
-              className={css.picture}
-              src={`https://image.tmdb.org/t/p/w500${movieDetails.backdrop_path}`}
-              alt={movieDetails.title}
-            />
+            <a href={movieDetails.homepage}>
+              <img
+                className={css.picture}
+                src={`https://image.tmdb.org/t/p/w500${movieDetails.backdrop_path}`}
+                alt={movieDetails.title}
+              />
+            </a>
           ) : (
             <img
               className={css.picture}
@@ -64,7 +66,6 @@ const MovieDetailsPage = () => {
               alt={movieDetails.title}
             />
           )}
-
           <div className={css.movie_container_inf}>
             <h3>
               {movieDetails.title} ( {movieDetails.release_date.slice(0, 4)} )
