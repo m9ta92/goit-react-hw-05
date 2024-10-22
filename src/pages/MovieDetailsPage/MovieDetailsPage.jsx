@@ -52,13 +52,11 @@ const MovieDetailsPage = () => {
         </button>
         <div className={css.container}>
           {movieDetails.backdrop_path ? (
-            <a href={movieDetails.homepage}>
-              <img
-                className={css.picture}
-                src={`https://image.tmdb.org/t/p/w500${movieDetails.backdrop_path}`}
-                alt={movieDetails.title}
-              />
-            </a>
+            <img
+              className={css.picture}
+              src={`https://image.tmdb.org/t/p/w500${movieDetails.backdrop_path}`}
+              alt={movieDetails.title}
+            />
           ) : (
             <img
               className={css.picture}
@@ -77,8 +75,14 @@ const MovieDetailsPage = () => {
             ) : (
               <p>No reviews yet </p>
             )}
-            <h4>Genres</h4>
-            <p>{movieDetails.genres.map(genre => genre.name)}</p>
+            <div className={css.genres}>
+              <h4>Genres</h4>
+              <ul className={css.genres_list}>
+                {movieDetails.genres.map(genre => (
+                  <li key={genre.id}>{genre.name}</li>
+                ))}
+              </ul>
+            </div>
           </div>
         </div>
         <div className={css.list}>

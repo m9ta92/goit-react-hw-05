@@ -54,6 +54,18 @@
     color: blueviolet;
 }
 
+.genres {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+}
+
+.genres_list {
+    display: flex;
+    gap: 10px;
+}
+
 @media screen and (min-width: 768px) {
     .container {
         flex-direction: row;
