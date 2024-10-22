@@ -5,6 +5,7 @@
     border: 1px solid black;
     border-radius: 5px;
     padding: 10px;
+    background-color: rgb(171, 214, 214, 0.2);
 }
 
 .item {
