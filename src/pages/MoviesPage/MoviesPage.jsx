@@ -38,7 +38,7 @@ const MoviesPage = () => {
         setSearchMovies(data.results);
       } else {
         toast.error('Opps, any movie for your question 🙋 ', {
-          position: 'top-center',
+          position: 'top-right',
         });
         setSearchMovies(null);
       }
@@ -51,7 +51,7 @@ const MoviesPage = () => {
     event.preventDefault();
     if (term.trim() === '') {
       toast.error('Please enter a correct value to search for 🙋', {
-        position: 'top-center',
+        position: 'top-right',
       });
       setTerm('');
       return;

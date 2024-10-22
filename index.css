@@ -34,5 +34,6 @@ img {
 }
 
 body {
-    background-color: azure;
+    background: linear-gradient(to right, rgb(82, 82, 202), rgb(250, 250, 117));
+    /* background-color: azure; */
 }

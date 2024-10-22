@@ -5,7 +5,8 @@
     border: 1px solid black;
     border-radius: 5px;
     padding: 10px;
-    background-color: gainsboro;
+    background-color: hsl(0, 0%, 86%, 20%);
+
 }
 
 .container:hover {
@@ -17,6 +18,7 @@
     flex-wrap: wrap;
     gap: 30px;
     font-size: larger;
+    justify-content: center;
 }
 
 .photo {
