@@ -1,0 +1,14 @@
+.homeBtn {
+    display: block;
+    border: 1px solid transparent;
+    background-color: rgb(135, 209, 209);
+    border-radius: 5px;
+    padding: 5px;
+    font-size: large;
+    margin-top: 15px;
+    width: fit-content;
+}
+
+.homeBtn:hover {
+    border: 1px solid rgb(255, 153, 0);
+}

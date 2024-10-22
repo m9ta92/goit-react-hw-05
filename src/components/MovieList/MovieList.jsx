@@ -1,4 +1,5 @@
 import { Link, useLocation } from 'react-router-dom';
+
 import css from './MovieList.module.css';
 
 const MovieList = ({ movies }) => {
@@ -16,7 +17,7 @@ const MovieList = ({ movies }) => {
               to={`/movies/${movie.id}`}
               key={movie.id}
             >
-              <div>
+              <div className={css.container}>
                 {movie.backdrop_path ? (
                   <img
                     className={css.photo}

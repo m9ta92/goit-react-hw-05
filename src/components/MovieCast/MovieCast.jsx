@@ -44,7 +44,7 @@ const MovieCast = () => {
               ) : (
                 <img
                   className={css.photo}
-                  src="https://t4.ftcdn.net/jpg/07/91/22/59/240_F_791225927_caRPPH99D6D1iFonkCRmCGzkJPf36QDw.jpg"
+                  src="https://static3.bigstockphoto.com/9/1/3/large2/31903202.jpg"
                 />
               )}
               <p>{movieCast.name}</p>

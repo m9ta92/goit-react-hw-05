@@ -33,14 +33,20 @@ const MovieReviews = () => {
   if (movieReviews)
     return (
       <>
-        <ul className={css.list}>
-          {movieReviews.map(movieReview => (
-            <li className={css.item} key={movieReview.id}>
-              <h4>{movieReview.author}</h4>
-              <p>{movieReview.content}</p>
-            </li>
-          ))}
-        </ul>
+        {movieReviews.length ? (
+          <ul className={css.list}>
+            {movieReviews.map(movieReview => (
+              <li className={css.item} key={movieReview.id}>
+                <h4>
+                  Autor: <span>{movieReview.author}</span>
+                </h4>
+                <p>{movieReview.content}</p>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p>We do not have any reviews for this movie...</p>
+        )}
       </>
     );
 };

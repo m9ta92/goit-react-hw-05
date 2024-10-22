@@ -2,11 +2,11 @@
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
-    align-items: end;
+    justify-content: center;
     border: 1px solid black;
     border-radius: 5px;
     width: fit-content;
-    padding: 20px;
+    padding: 10px;
 }
 
 .item {
@@ -16,11 +16,13 @@
     border: 1px solid black;
     border-radius: 5px;
     padding: 10px;
+    background-color: whitesmoke;
+    align-items: center;
 }
 
 .photo {
-    width: 200px;
-    height: 300px;
+    width: 180px;
+    height: 250px;
     object-fit: cover;
     margin-bottom: 10px;
 }

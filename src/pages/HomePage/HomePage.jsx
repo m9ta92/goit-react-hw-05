@@ -1,8 +1,8 @@
-// Fixing please !!!
-
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+
 import MovieList from '../../components/MovieList/MovieList';
+
 import css from './HomePage.module.css';
 
 const HomePage = () => {

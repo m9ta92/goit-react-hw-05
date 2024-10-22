@@ -1,7 +1,6 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import {
-  Link,
   NavLink,
   Outlet,
   useLocation,
@@ -11,6 +10,7 @@ import {
 
 import css from './MovieDetailsPage.module.css';
 import clsx from 'clsx';
+
 const cssClasses = ({ isActive }) => clsx(isActive && css.active);
 
 const MovieDetailsPage = () => {
@@ -50,17 +50,26 @@ const MovieDetailsPage = () => {
         <button className={css.Btn} onClick={goBack}>
           Go back
         </button>
-        <div className={css.movie_container}>
-          <img
-            className={css.picture}
-            src={`https://image.tmdb.org/t/p/w500${movieDetails.backdrop_path}`}
-            alt={movieDetails.title}
-          />
+        <div className={css.container}>
+          {movieDetails.backdrop_path ? (
+            <img
+              className={css.picture}
+              src={`https://image.tmdb.org/t/p/w500${movieDetails.backdrop_path}`}
+              alt={movieDetails.title}
+            />
+          ) : (
+            <img
+              className={css.picture}
+              src="https://t4.ftcdn.net/jpg/07/91/22/59/240_F_791225927_caRPPH99D6D1iFonkCRmCGzkJPf36QDw.jpg"
+              alt={movieDetails.title}
+            />
+          )}
+
           <div className={css.movie_container_inf}>
             <h3>
               {movieDetails.title} ( {movieDetails.release_date.slice(0, 4)} )
             </h3>
-            <p>User score: {movieDetails.vote_count}%</p>
+            <p>User score: {movieDetails.vote_average}/10</p>
             <h4>Overview</h4>
             {movieDetails.overview ? (
               movieDetails.overview
