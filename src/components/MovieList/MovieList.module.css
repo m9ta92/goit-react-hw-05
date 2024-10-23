@@ -11,7 +11,7 @@
 }
 
 .container:hover {
-    transform: scale(1.01);
+    transform: scale(1.1);
 }
 
 .list {
@@ -23,8 +23,6 @@
     justify-content: center;
 
 }
-
-
 
 .photo {
     width: 300px;
