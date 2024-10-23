@@ -36,7 +36,7 @@ const HomePage = () => {
       {isLoading && <Loader />}
       {error && <ErrorMessage />}
       <div className={css.container}>
-        {error ? null : <h3 className={css.title}> ↓ Trending today ↓</h3>}
+        {error ? null : <h3 className={css.title}> ↓ TOP-20 for a week ↓</h3>}
         <MovieList movies={trendingMovies} />
       </div>
     </>

@@ -29,7 +29,7 @@ const MovieList = ({ movies }) => {
                     src="https://t4.ftcdn.net/jpg/07/91/22/59/240_F_791225927_caRPPH99D6D1iFonkCRmCGzkJPf36QDw.jpg"
                   />
                 )}
-                <p>{movie.title}</p>
+                <p className={css.title}>{movie.title}</p>
               </div>
             </Link>
           ))}
