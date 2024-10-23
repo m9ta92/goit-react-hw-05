@@ -7,9 +7,7 @@ import {
   useNavigate,
   useParams,
 } from 'react-router-dom';
-
 import { options } from '../../utils/options';
-
 import css from './MovieDetailsPage.module.css';
 import clsx from 'clsx';
 

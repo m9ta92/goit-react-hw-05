@@ -1,13 +1,10 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-
 import { url } from '../../utils/url';
 import { options } from '../../utils/options';
-
 import Loader from '../../components/Loader/Loader';
 import ErrorMessage from '../../components/ErrorMessage/ErrorMessage.jsx';
 import MovieList from '../../components/MovieList/MovieList';
-
 import css from './HomePage.module.css';
 
 const HomePage = () => {

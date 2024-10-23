@@ -1,14 +1,11 @@
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
-
 import toast, { Toaster } from 'react-hot-toast';
 import { options } from '../../utils/options';
-
 import Loader from '../../components/Loader/Loader';
 import ErrorMessage from '../../components/ErrorMessage/ErrorMessage.jsx';
 import MovieList from '../../components/MovieList/MovieList';
-
 import css from './MoviesPage.module.css';
 
 const MoviesPage = () => {
@@ -26,6 +23,7 @@ const MoviesPage = () => {
 
     const fetchSearchMovies = async () => {
       try {
+        setIsLoading(true);
         const { data } = await axios
           .get(
             `https://api.themoviedb.org/3/search/movie?query=${searchValue}&include_adult=false&language=en-US&page=1`,
@@ -36,7 +34,7 @@ const MoviesPage = () => {
           setSearchMovies(data.results);
         } else {
           toast.error('Opps, any movie for your question 🙋 ', {
-            position: 'top-right',
+            position: 'top-center',
           });
           setSearchMovies(null);
         }
@@ -54,7 +52,7 @@ const MoviesPage = () => {
     event.preventDefault();
     if (term.trim() === '') {
       toast.error('Please enter a correct value to search for 🙋', {
-        position: 'top-right',
+        position: 'top-center',
       });
       setTerm('');
       return;
@@ -72,8 +70,6 @@ const MoviesPage = () => {
           className={css.searchInput}
           type="text"
           name="name"
-          // autoComplete="off"
-          // autoFocus
           placeholder="Search movies..."
           value={term}
           onChange={event => setTerm(event.target.value)}
