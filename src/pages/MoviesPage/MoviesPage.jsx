@@ -7,9 +7,13 @@ import Loader from '../../components/Loader/Loader';
 import ErrorMessage from '../../components/ErrorMessage/ErrorMessage.jsx';
 import MovieList from '../../components/MovieList/MovieList';
 import css from './MoviesPage.module.css';
+import LoadMoreBtn from '../../components/LoadMoreBtn/LoadMoreBtn.jsx';
+import ScrollToTop from '../../components/ScrollToTop/ScrollToTop.jsx';
 
 const MoviesPage = () => {
   const [searchMovies, setSearchMovies] = useState(null);
+  const [page, setPage] = useState(1);
+  const [totalPage, setTotalPage] = useState(1);
   // const [searchValue, setSearchValue] = useState(null);
   const [searchParams, setSearchParams] = useSearchParams();
   const [term, setTerm] = useState('');
@@ -19,6 +23,18 @@ const MoviesPage = () => {
   const searchValue = searchParams.get('q');
 
   useEffect(() => {
+    if (searchMovies === null) {
+      return;
+    }
+    if (searchMovies.length > 20) {
+      window.scrollBy({
+        top: 550,
+        behavior: 'smooth',
+      });
+    }
+  }, [searchMovies]);
+
+  useEffect(() => {
     if (searchValue === null) return;
 
     const fetchSearchMovies = async () => {
@@ -26,17 +42,16 @@ const MoviesPage = () => {
         setIsLoading(true);
         const { data } = await axios
           .get(
-            `https://api.themoviedb.org/3/search/movie?query=${searchValue}&include_adult=false&language=en-US&page=1`,
+            `https://api.themoviedb.org/3/search/movie?query=${searchValue}&include_adult=false&language=en-US&page=${page}`,
             options
           )
           .catch(err => console.error(err));
-        if (data.total_results) {
-          setSearchMovies(data.results);
+
+        if (data.page > 1) {
+          setSearchMovies(prevImages => [...prevImages, ...data.results]);
         } else {
-          toast.error('Opps, any movie for your question 🙋 ', {
-            position: 'top-center',
-          });
-          setSearchMovies(null);
+          setSearchMovies(data.results);
+          setTotalPage(data.total_pages);
         }
       } catch (error) {
         setError(error.message);
@@ -46,7 +61,7 @@ const MoviesPage = () => {
     };
 
     fetchSearchMovies();
-  }, [searchValue]);
+  }, [searchValue, page]);
 
   const handleSubmit = event => {
     event.preventDefault();
@@ -61,6 +76,11 @@ const MoviesPage = () => {
       setSearchParams({ q: term.trim() });
       setTerm('');
     }
+  };
+
+  const loadNextPage = () => {
+    const newPage = page + 1;
+    setPage(newPage);
   };
 
   return (
@@ -82,6 +102,10 @@ const MoviesPage = () => {
       {isLoading && <Loader />}
       {error && <ErrorMessage />}
       <MovieList movies={searchMovies} />
+      {totalPage === page ? null : (
+        <LoadMoreBtn totalPage={totalPage} loadNextPage={loadNextPage} />
+      )}
+      <ScrollToTop />
     </>
   );
 };

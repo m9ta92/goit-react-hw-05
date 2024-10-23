@@ -1,0 +1,13 @@
+.Btn {
+    position: fixed;
+    bottom: 10px;
+    right: 5px;
+    background-color: black;
+    color: white;
+    border-radius: 5px;
+    padding: 10px 20px;
+}
+
+.Btn:hover {
+    transform: scale(1.1);
+}

@@ -1,0 +1,14 @@
+.loadMoreBtn {
+
+    background-color: black;
+    border-radius: 5px;
+    display: block;
+    margin: auto;
+    font-size: medium;
+    padding: 10px;
+    color: white;
+}
+
+.loadMoreBtn:hover {
+    transform: scale(1.05);
+}

@@ -3,6 +3,7 @@ import css from './MovieList.module.css';
 
 const MovieList = ({ movies }) => {
   const location = useLocation();
+
   if (movies) {
     return (
       <div className={css.list}>
