@@ -5,11 +5,12 @@
 }
 
 .name {
-    display: block;
+    display: flex;
     position: absolute;
     top: 5px;
     font-size: xx-large;
     font-weight: 500;
+    align-items: center;
 }
 
 .name_title {
