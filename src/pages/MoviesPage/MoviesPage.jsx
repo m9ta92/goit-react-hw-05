@@ -9,6 +9,7 @@ import MovieList from '../../components/MovieList/MovieList';
 import css from './MoviesPage.module.css';
 import LoadMoreBtn from '../../components/LoadMoreBtn/LoadMoreBtn.jsx';
 import ScrollToTop from '../../components/ScrollToTop/ScrollToTop.jsx';
+import { CiSearch } from 'react-icons/ci';
 
 const MoviesPage = () => {
   const [searchMovies, setSearchMovies] = useState(null);
@@ -67,7 +68,7 @@ const MoviesPage = () => {
     event.preventDefault();
     if (term.trim() === '') {
       toast.error('Please enter a correct value to search for 🙋', {
-        position: 'top-center',
+        position: 'botton-center',
       });
       setTerm('');
       return;
@@ -96,7 +97,7 @@ const MoviesPage = () => {
         />
         <Toaster position="top-right" reverseOrder={false} />
         <button className={css.searchBtn} type="submit">
-          Search
+          <CiSearch />
         </button>
       </form>
       {isLoading && <Loader />}
