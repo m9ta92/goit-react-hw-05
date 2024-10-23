@@ -8,7 +8,9 @@ function Navigation() {
   return (
     <>
       <header className={css.header}>
-        <h2 className={css.name}>🎞️ Movies store</h2>
+        <h2 className={css.name}>
+          🎞️ <span className={css.name_title}>Movies store</span>
+        </h2>
         <nav className={css.list}>
           <NavLink className={cssClasses} to="/">
             Home
