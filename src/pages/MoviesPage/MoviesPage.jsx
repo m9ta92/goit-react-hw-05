@@ -3,24 +3,21 @@ import { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
 import toast, { Toaster } from 'react-hot-toast';
+import { options } from '../../utils/options';
 
+import Loader from '../../components/Loader/Loader';
+import ErrorMessage from '../../components/ErrorMessage/ErrorMessage.jsx';
 import MovieList from '../../components/MovieList/MovieList';
 
 import css from './MoviesPage.module.css';
 
 const MoviesPage = () => {
-  const [options] = useState({
-    method: 'GET',
-    headers: {
-      accept: 'application/json',
-      Authorization:
-        'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJmNTI0NTRmNGZmZjk0ZTVjOTE4NjhhNDZjOGQxMDQ1NyIsIm5iZiI6MTcyOTE5MzUzMi45NTU0NzYsInN1YiI6IjY3MTE1YTA0MjlkOGE1OWUwNDVlYzk4NCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.Kdlbow49ibH1cGXKkloUBH6jAQ7gEpEKwfBkL_zotvg',
-    },
-  });
   const [searchMovies, setSearchMovies] = useState(null);
   // const [searchValue, setSearchValue] = useState(null);
   const [searchParams, setSearchParams] = useSearchParams();
   const [term, setTerm] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   const searchValue = searchParams.get('q');
 
@@ -28,24 +25,30 @@ const MoviesPage = () => {
     if (searchValue === null) return;
 
     const fetchSearchMovies = async () => {
-      const { data } = await axios
-        .get(
-          `https://api.themoviedb.org/3/search/movie?query=${searchValue}&include_adult=false&language=en-US&page=1`,
-          options
-        )
-        .catch(err => console.error(err));
-      if (data.total_results) {
-        setSearchMovies(data.results);
-      } else {
-        toast.error('Opps, any movie for your question 🙋 ', {
-          position: 'top-right',
-        });
-        setSearchMovies(null);
+      try {
+        const { data } = await axios
+          .get(
+            `https://api.themoviedb.org/3/search/movie?query=${searchValue}&include_adult=false&language=en-US&page=1`,
+            options
+          )
+          .catch(err => console.error(err));
+        if (data.total_results) {
+          setSearchMovies(data.results);
+        } else {
+          toast.error('Opps, any movie for your question 🙋 ', {
+            position: 'top-right',
+          });
+          setSearchMovies(null);
+        }
+      } catch (error) {
+        setError(error.message);
+      } finally {
+        setIsLoading(false);
       }
     };
 
     fetchSearchMovies();
-  }, [searchValue, options]);
+  }, [searchValue]);
 
   const handleSubmit = event => {
     event.preventDefault();
@@ -69,8 +72,8 @@ const MoviesPage = () => {
           className={css.searchInput}
           type="text"
           name="name"
-          autoComplete="off"
-          autoFocus
+          // autoComplete="off"
+          // autoFocus
           placeholder="Search movies..."
           value={term}
           onChange={event => setTerm(event.target.value)}
@@ -80,6 +83,8 @@ const MoviesPage = () => {
           Search
         </button>
       </form>
+      {isLoading && <Loader />}
+      {error && <ErrorMessage />}
       <MovieList movies={searchMovies} />
     </>
   );

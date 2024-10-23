@@ -1,12 +1,21 @@
 .header {
+    padding-bottom: 8px;
     margin-bottom: 20px;
+    border-bottom: 1px solid black;
+}
+
+.name {
+    position: absolute;
+    top: 10px;
+    font-size: xx-large;
+    font-weight: 500;
 }
 
 .list {
     display: flex;
     gap: 20px;
     font-size: xx-large;
-    justify-content: center;
+    justify-content: end;
 }
 
 .item {

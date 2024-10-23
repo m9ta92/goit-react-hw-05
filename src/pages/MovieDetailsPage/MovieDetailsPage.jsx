@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import {
   NavLink,
   Outlet,
@@ -8,21 +8,14 @@ import {
   useParams,
 } from 'react-router-dom';
 
+import { options } from '../../utils/options';
+
 import css from './MovieDetailsPage.module.css';
 import clsx from 'clsx';
 
 const cssClasses = ({ isActive }) => clsx(isActive && css.active) || css.link;
 
 const MovieDetailsPage = () => {
-  const [options] = useState({
-    method: 'GET',
-    headers: {
-      accept: 'application/json',
-      Authorization:
-        'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJmNTI0NTRmNGZmZjk0ZTVjOTE4NjhhNDZjOGQxMDQ1NyIsIm5iZiI6MTcyOTE5MjI2OC4xODczODksInN1YiI6IjY3MTE1YTA0MjlkOGE1OWUwNDVlYzk4NCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.uJg6F-xqM6MpIr-XliFyApDdMMv8qzYHU51A2hdklME',
-    },
-  });
-
   const [movieDetails, setMovieDetails] = useState(null);
   const { movieId } = useParams();
 
@@ -37,11 +30,12 @@ const MovieDetailsPage = () => {
       setMovieDetails(data);
     };
     fetchTrendingMovies();
-  }, [options, movieId]);
+  }, [movieId]);
 
-  const navigate = useNavigate();
   const location = useLocation();
-  const backUrl = location.state?.from;
+  const previousStateRef = useRef(location.state);
+  const backUrl = previousStateRef.current?.from ?? '/movies';
+  const navigate = useNavigate();
   const goBack = () => navigate(backUrl);
 
   if (movieDetails != null)
