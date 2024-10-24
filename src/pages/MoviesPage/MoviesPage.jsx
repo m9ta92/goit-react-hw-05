@@ -1,15 +1,18 @@
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import toast, { Toaster } from 'react-hot-toast';
+
 import { options } from '../../utils/options';
+import MovieList from '../../components/MovieList/MovieList';
+
 import Loader from '../../components/Loader/Loader';
 import ErrorMessage from '../../components/ErrorMessage/ErrorMessage.jsx';
-import MovieList from '../../components/MovieList/MovieList';
-import css from './MoviesPage.module.css';
 import LoadMoreBtn from '../../components/LoadMoreBtn/LoadMoreBtn.jsx';
 import ScrollToTop from '../../components/ScrollToTop/ScrollToTop.jsx';
+
+import toast, { Toaster } from 'react-hot-toast';
 import { CiSearch } from 'react-icons/ci';
+import css from './MoviesPage.module.css';
 
 const MoviesPage = () => {
   const [searchMovies, setSearchMovies] = useState(null);
@@ -47,7 +50,6 @@ const MoviesPage = () => {
             options
           )
           .catch(err => console.error(err));
-
         if (data.page > 1) {
           setSearchMovies(prevImages => [...prevImages, ...data.results]);
         } else {

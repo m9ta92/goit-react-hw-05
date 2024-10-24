@@ -35,10 +35,12 @@ const HomePage = () => {
     <>
       {isLoading && <Loader />}
       {error && <ErrorMessage />}
-      <div className={css.container}>
-        {error ? null : <h3 className={css.title}> ↓ TOP-20 for a week ↓</h3>}
-        <MovieList movies={trendingMovies} />
-      </div>
+      {error ? null : (
+        <div className={css.container}>
+          <h3 className={css.title}> ↓ TOP-20 for a week ↓</h3>
+          <MovieList movies={trendingMovies} />
+        </div>
+      )}
     </>
   );
 };
