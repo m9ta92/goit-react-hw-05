@@ -1,1 +1,1 @@
-![movies store](https://github.com/user-attachments/assets/4c97e41d-e44d-4439-8d97-76e0f847fb8b)
+![movies store](https://github.com/user-attachments/assets/34ac42a5-b084-486e-b680-66425cb9f2cb)
